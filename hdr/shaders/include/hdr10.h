@@ -110,7 +110,7 @@ const mat3 kExpanded709_to_2020 = mat3 (
 
 //const mat3 k2020Gamuts[2] = { k709_to_2020, kExpanded709_to_2020 };
 //const mat3 k2020Gamuts[17] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, k3213E_to_2020, kaDCIP3_to_2020, kaDisplayP3_to_2020, ksRGB_to_2020, kAdobeRGB1998_to_2020, kAdobeWGRGB_to_2020, kAppleRGB_to_2020, k2020_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020 };
-const mat3 k2020Gamuts[11] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, kaDisplayP3_to_2020, k2020_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020 };
+const mat3 k2020Gamuts[11] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020, kaDisplayP3_to_2020, k2020_to_2020 };
 
 float LinearToST2084_1(const float channel)
 {
