@@ -21,10 +21,11 @@
 #pragma parameter hcrt_support9                      "    "       0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_support10                      "    0:709 (Original)/1:expanded 709 (Vivid)/2:1953/3:601/4:PAL"       0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_support11                      "    5:P22-J/6:P22-80/7:P22-90/8:RPTV/9:DP3/10:2020"       0.0      0.0   0.0001   0.0001
-#pragma parameter hcrt_support12                      "    This setting hypothetically replaces the"       0.0      0.0   0.0001   0.0001
-#pragma parameter hcrt_support13                      "    Colour System and Phosphors options in HDR."       0.0      0.0   0.0001   0.0001
-#pragma parameter hcrt_support14                      "    Under CRT SETTINGS:"       0.0      0.0   0.0001   0.0001
-#pragma parameter hcrt_support15                      "    Set Colour System to r709 and Phosphors to NONE"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support12                      "    "       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support13                      "    This setting (hypothetically) replaces the"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support14                      "    Colour System and Phosphors options in HDR."       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support15                      "    Use Colour Accurate and, under CRT SETTINGS,"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support16                      "    Set Colour System to r709 and Phosphors to NONE"       0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_space5                        " "                                                            0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_colour_space                  "    SDR: Display's Colour Space: r709 | sRGB | DCI-P3"        1.0      0.0   2.0      1.0
 #pragma parameter hcrt_r709_gamma_out                "    SDR: r709 Gamma"                                          2.22     1.0   5.0      0.01
