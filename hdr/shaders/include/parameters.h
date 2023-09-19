@@ -16,7 +16,14 @@
 #pragma parameter hcrt_space4                        " "                                                            0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_max_nits                      "    HDR: Display's Peak Luminance"                            1000.0   0.0   10000.0  10.0
 #pragma parameter hcrt_paper_white_nits              "    HDR: Display's Paper White Luminance"                     200.0    0.0   10000.0  10.0
-#pragma parameter hcrt_expand_gamut                  "    HDR: Original/Vivid"                                      0.0      0.0   1.0      1.0
+#pragma parameter hcrt_support8                      "    "       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_expand_gamut                  "    HDR: Content Color Gamut"                                      0.0      0.0   10.0      1.0
+#pragma parameter hcrt_support9                      "    0:709 (Original)/1:expanded 709 (Vivid)/2:1953/3:601/4:PAL"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support10                      "    5:DP3/6:2020/7:P22-J/8:P22-80/9:P22-90/10:RPTV"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support11                      "    This setting hypothetically replaces the"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support12                      "    Colour System and Phosphors options in HDR."       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support13                      "    Under CRT SETTINGS"       0.0      0.0   0.0001   0.0001
+#pragma parameter hcrt_support14                      "    Set Colour System to r709 and Phosphors to NONE"       0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_space5                        " "                                                            0.0      0.0   0.0001   0.0001
 #pragma parameter hcrt_colour_space                  "    SDR: Display's Colour Space: r709 | sRGB | DCI-P3"        1.0      0.0   2.0      1.0
 #pragma parameter hcrt_r709_gamma_out                "    SDR: r709 Gamma"                                          2.22     1.0   5.0      0.01
