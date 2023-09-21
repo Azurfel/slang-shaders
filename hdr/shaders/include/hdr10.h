@@ -88,25 +88,25 @@ const mat3 kExpanded709_to_2020 = mat3 (
  const mat3 kNTSCJP22_to_2020 = mat3 (
    0.691014f, 0.261287f, 0.047700f,
    0.109646f, 0.876813f, 0.013541f,
-   0.014382f, 0.096629f, 0.888989);
+   0.014382f, 0.096629f, 0.888989f);
 
 // P22_80
  const mat3 kP2280_to_2020 = mat3 (
    0.702409f, 0.260434f, 0.037157f,
    0.087800f, 0.889849f, 0.022351f,
-   0.004390f, 0.077212f, 0.918398);
+   0.004390f, 0.077212f, 0.918398f);
 
 // P22 improved with tinted phosphors
  const mat3 kP2290_to_2020 = mat3 (
    0.621792f, 0.339128f, 0.039080f,
    0.057073f, 0.919420f, 0.023508f,
-   -0.000938f, 0.035014f, 0.965924);
+   -0.000938f, 0.035014f, 0.965924f);
 
 // RPTV (Rear Projection TV) for NTSC-U late 90s, early 00s
  const mat3 kRPTV_to_2020 = mat3 (
    0.504405f, 0.451465f, 0.044129f,
    0.059729f, 0.908159f, 0.032112f,
-   0.010633f, 0.062627f, 0.926741);
+   0.010633f, 0.062627f, 0.926741f);
 
 //const mat3 k2020Gamuts[2] = { k709_to_2020, kExpanded709_to_2020 };
 //const mat3 k2020Gamuts[17] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, k3213E_to_2020, kaDCIP3_to_2020, kaDisplayP3_to_2020, ksRGB_to_2020, kAdobeRGB1998_to_2020, kAdobeWGRGB_to_2020, kAppleRGB_to_2020, k2020_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020 };
