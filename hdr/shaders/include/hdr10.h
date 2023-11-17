@@ -2,9 +2,12 @@
 #define kMaxNitsFor2084     10000.0f
 
 const mat3 k709_to_2020 = mat3 (
-   0.6274040f, 0.3292820f, 0.0433136f,
-   0.0690970f, 0.9195400f, 0.0113612f,
-   0.0163916f, 0.0880132f, 0.8955950f);
+//   0.6274040f, 0.3292820f, 0.0433136f,
+//   0.0690970f, 0.9195400f, 0.0113612f,
+//   0.0163916f, 0.0880132f, 0.8955950f);
+   0.627403895934699f, 0.329283038377884f, 0.043313065687417f,
+   0.069097289358232f, 0.919540395075458f, 0.011362315566309f,
+   0.016391438875150f, 0.088013307877226f, 0.895595253247624f);
 
 /* START Converted from (Copyright (c) Microsoft Corporation - Licensed under the MIT License.)  https://github.com/microsoft/Xbox-ATG-Samples/tree/master/Kits/ATGTK/HDR */
 const mat3 kExpanded709_to_2020 = mat3 (
@@ -14,9 +17,13 @@ const mat3 kExpanded709_to_2020 = mat3 (
 
 //NTSC (1953)/ITU-R BT.470 - 525
  const mat3 kNTSC1953_to_2020 = mat3 (
-   0.924130283352921f, 0.058040878058827f, 0.017828838588251f,
-   0.081832452209371f, 0.839996416103710f, 0.078171131686919f,
-   -0.003138728266940f, 0.033216715568834f, 0.969922012698106f);
+//   0.924130283352921f, 0.058040878058827f, 0.017828838588251f,
+//   0.081832452209371f, 0.839996416103710f, 0.078171131686919f,
+//   -0.003138728266940f, 0.033216715568834f, 0.969922012698106f);
+
+   0.906538f, 0.074810f, 0.018652f,
+   0.076155f, 0.860656f, 0.063189f,
+   -0.002015f, 0.041546f, 0.960469f);
 
 //NTSC (1987)/SMPTE 240M/SMPTE C
  const mat3 k601_to_2020 = mat3 (
@@ -68,9 +75,13 @@ const mat3 kExpanded709_to_2020 = mat3 (
 
 //Adobe Wide Gamut RGB
  const mat3 kAdobeWGRGB_to_2020 = mat3 (
-   1.107073553496249f, -0.153227847929002f, 0.046154294432753f,
-   -0.050931551529117f, 1.130629708912274f, -0.079698157383157f,
-   0.004751406104069f, 0.043194090984263f, 0.952054502911668f);
+//   1.107073553496249f, -0.153227847929002f, 0.046154294432753f,
+//   -0.050931551529117f, 1.130629708912274f, -0.079698157383157f,
+//   0.004751406104069f, 0.043194090984263f, 0.952054502911668f);
+
+   1.032815f, -0.099761f, 0.066946f,
+   -0.053957f, 1.132758f, -0.078800f,
+   0.001428f, 0.019514f, 0.979059f);
 
 //Apple RGB
  const mat3 kAppleRGB_to_2020 = mat3 (
@@ -108,9 +119,78 @@ const mat3 kExpanded709_to_2020 = mat3 (
    0.059729f, 0.908159f, 0.032112f,
    0.010633f, 0.062627f, 0.926741f);
 
+// XXA (P22 sulﬁde/silicate/phosphate)
+ const mat3 kXXA_to_2020 = mat3 (
+   0.867034f, 0.096021f, 0.036945f,
+   0.064650f, 0.936157f, -0.000808f,
+   -0.001711f, 0.036583f, 0.965127f);
+
+// XXB (P22 all-sulﬁde)/1958
+ const mat3 kXXB_to_2020 = mat3 (
+//   0.747111f, 0.224558f, 0.028332f,
+//   0.075382f, 0.925237f, -0.000619f,
+//   -0.001995f, 0.261872f, 0.740122f);
+
+   0.651821f, 0.292537f, 0.055642f,
+   0.065768f, 0.926913f, 0.007319f,
+   -0.001740f, 0.104000f, 0.897740f);
+
+// XXC (P22 sulﬁde/vanadate)/1964
+ const mat3 kXXC_to_2020 = mat3 (
+//   0.661541f, 0.304499f, 0.033961f,
+//   0.047782f, 0.952961f, -0.000742f,
+//   -0.001264f, 0.114094f, 0.887170f);
+
+   0.706425f, 0.235501f, 0.058074f,
+   0.065679f, 0.952661f, -0.018340f,
+   0.015010f, 0.132171f, 0.852819f);
+
+// XXD (P22 sulﬁde/oxysulﬁde)
+ const mat3 kXXD_to_2020 = mat3 (
+//   0.526084f, 0.418310f, 0.055607f,
+//   0.073322f, 0.901471f, 0.025207f,
+//   0.001097f, 0.052624f, 0.946279f);
+
+   0.639371f, 0.317872f, 0.042756f,
+   0.085284f, 0.887675f, 0.027041f,
+   0.019961f, 0.084963f, 0.895076f);
+
+//Conrac 7211N19
+ const mat3 kConrac_to_2020 = mat3 (
+   0.848016f, 0.103509f, 0.048476f,
+   0.090261f, 0.893984f, 0.015755f,
+   0.030765f, 0.064658f, 0.904577f);
+
+//Sony Trinitron KV-20M20
+ const mat3 kTT96_to_2020 = mat3 (
+   0.678529f, 0.268103f, 0.053367f,
+   0.096032f, 0.877730f, 0.026238f,
+   0.021193f, 0.109847f, 0.868961f);
+
+//SMPTE-C - Measured Average Phosphor (1979-1994)
+ const mat3 kMA7994_to_2020 = mat3 (
+   0.708152f, 0.257311f, 0.034538f,
+   0.103842f, 0.879177f, 0.016980f,
+   0.002749f, 0.076286f, 0.920965f);
+
+//NTSC-J - Standard Phosphor
+ const mat3 kNTSCJSt_to_2020 = mat3 (
+   0.693529f, 0.259060f, 0.047411f,
+   0.115249f, 0.869342f, 0.015409f,
+   0.019484f, 0.095806f, 0.884711f);
+
+//Philips Monitors
+ const mat3 kPhilips_to_2020 = mat3 (
+   0.634936f, 0.310278f, 0.054786f,
+   0.082458f, 0.909159f, 0.008382f,
+   0.013977f, 0.061264f, 0.924759f);
+
 //const mat3 k2020Gamuts[2] = { k709_to_2020, kExpanded709_to_2020 };
 //const mat3 k2020Gamuts[17] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, k3213E_to_2020, kaDCIP3_to_2020, kaDisplayP3_to_2020, ksRGB_to_2020, kAdobeRGB1998_to_2020, kAdobeWGRGB_to_2020, kAppleRGB_to_2020, k2020_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020 };
-const mat3 k2020Gamuts[11] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020, kaDisplayP3_to_2020, k2020_to_2020 };
+//const mat3 k2020Gamuts[11] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, k601_to_2020, kPAL_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020, kaDisplayP3_to_2020, k2020_to_2020 };
+//const mat3 k2020Gamuts[18] = { kNTSC1953_to_2020, kXXA_to_2020, kXXB_to_2020, kXXC_to_2020, k601_to_2020, kXXD_to_2020, kPAL_to_2020, kNTSCJSt_to_2020, kNTSCJP22_to_2020, kMA7994_to_2020, kP2280_to_2020, kP2290_to_2020, kRPTV_to_2020, kTT96_to_2020, k709_to_2020, kExpanded709_to_2020, kaDisplayP3_to_2020, k2020_to_2020 };
+//const mat3 k2020Gamuts[15] = { kNTSC1953_to_2020, kXXB_to_2020, kXXC_to_2020, k601_to_2020, kPAL_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kAppleRGB_to_2020, kPhilips_to_2020, kP2290_to_2020, kRPTV_to_2020, k709_to_2020, kExpanded709_to_2020, kaDisplayP3_to_2020, k2020_to_2020 };
+const mat3 k2020Gamuts[15] = { k709_to_2020, kExpanded709_to_2020, kNTSC1953_to_2020, kXXB_to_2020, kXXC_to_2020, k601_to_2020, kPAL_to_2020, kNTSCJP22_to_2020, kP2280_to_2020, kAppleRGB_to_2020, kPhilips_to_2020, kP2290_to_2020, kRPTV_to_2020, kaDisplayP3_to_2020, k2020_to_2020 };
 
 float LinearToST2084_1(const float channel)
 {
