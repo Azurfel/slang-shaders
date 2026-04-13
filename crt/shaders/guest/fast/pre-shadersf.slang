@@ -3,7 +3,7 @@
 /*
    CRT Advanced color altering
    
-   Copyright (C) 2019-2022 guest(r) and Dr. Venom
+   Copyright (C) 2019-2025 guest(r) and Dr. Venom
    
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -38,16 +38,12 @@ layout(push_constant) uniform Push
    float sega_fix;
    float pre_bb;
    float contr;
+   float pre_gc;
 } params;
-
-
-#pragma parameter bogus_compat "[ COMPATIBILITY AND PERFORMANCE ]:" 0.0 0.0 1.0 1.0
-
-#pragma parameter fcompat "          Compatibility Mode (slower, use if glitchy)" 0.0 0.0 1.0 1.0 
 
 #pragma parameter bogus_color "[ COLOR TWEAKS ]:" 0.0 0.0 1.0 1.0
 
-#pragma parameter TNTC "          LUT Colors: Trin.1 | Trin.2 | Nec Mult. | NTSC" 0.0 0.0 4.0 1.0
+#pragma parameter TNTC "          LUT Colors: NTSC-J | Trinit. | Nec Mult. | NTSC 1953" 0.0 0.0 4.0 1.0
 #define TNTC params.TNTC
 
 #pragma parameter LS "          LUT Size" 32.0 16.0 64.0 16.0
@@ -64,6 +60,8 @@ layout(push_constant) uniform Push
 #pragma parameter pre_bb "          Brightness Adjustment" 1.0 0.0 2.0 0.01
 
 #pragma parameter contr "          Contrast Adjustment" 0.0 -2.0 2.0 0.05
+
+#pragma parameter pre_gc "          Gamma Correct Adjustment" 1.0 0.5 1.75 0.025
 
 #pragma parameter sega_fix "          Sega Brightness Fix" 0.0 0.0 1.0 1.0
 
@@ -105,8 +103,7 @@ layout(set = 0, binding = 3) uniform sampler2D SamplerLUT1;
 layout(set = 0, binding = 4) uniform sampler2D SamplerLUT2;
 layout(set = 0, binding = 5) uniform sampler2D SamplerLUT3;
 layout(set = 0, binding = 6) uniform sampler2D SamplerLUT4;
-layout(set = 0, binding = 7) uniform sampler2D OriginalHistory0;
-layout(set = 0, binding = 8) uniform sampler2D OriginalHistory1;
+
 
 #define COMPAT_TEXTURE(c,d) texture(c,d)
 
@@ -162,6 +159,13 @@ vec3 plant (vec3 tar, float r)
 float contrast(float x)
 {
 	return max(mix(x, smoothstep(0.0, 1.0, x), params.contr),0.0);
+}
+
+vec3 pgc(vec3 c)
+{
+	float mc = max(max(c.r,c.g),c.b);
+	float mg = pow(mc, 1.0/params.pre_gc);
+	return c * mg/(mc + 1e-8);  
 }
 
 void main()
@@ -250,6 +254,7 @@ void main()
 	
 	color = mix(color, comp, m);
 	color = pow(max(color, 0.0), vec3(1.0/p));
+	color = pgc(color);
 	
 	if (BP > -0.5) color = color + bp; else
 	{ 
@@ -258,24 +263,5 @@ void main()
 	
 	color = min(color * params.pre_bb, 1.0);
 
-	vec2 dx = vec2(params.SourceSize.z, 0.0);
-	vec2 xx = dx + dx;
-	vec2 pC4 = vTexCoord;
-
-	vec3 ol3 = COMPAT_TEXTURE(OriginalHistory1, pC4 -xx).rgb;
-	vec3 ol2 = COMPAT_TEXTURE(OriginalHistory1, pC4 -dx).rgb;
-	vec3 ol1 = COMPAT_TEXTURE(OriginalHistory1, pC4    ).rgb;
-	vec3 or1 = COMPAT_TEXTURE(OriginalHistory1, pC4 +dx).rgb;
-	vec3 or2 = COMPAT_TEXTURE(OriginalHistory1, pC4 +xx).rgb;
-
-	vec3 cl3 = COMPAT_TEXTURE(OriginalHistory0, pC4 -xx).rgb;	
-	vec3 cl2 = COMPAT_TEXTURE(OriginalHistory0, pC4 -dx).rgb;
-	vec3 cl1 = COMPAT_TEXTURE(OriginalHistory0, pC4    ).rgb;
-	vec3 cr1 = COMPAT_TEXTURE(OriginalHistory0, pC4 +dx).rgb;
-	vec3 cr2 = COMPAT_TEXTURE(OriginalHistory0, pC4 +xx).rgb;
-	
-	vec3 res = abs(ol3-cl3) + abs(ol2-cl2) + abs(ol1-cl1) + abs(or1-cr1) + abs(or2-cr2);
-	float res1 = 1.0;
-	if ((res.r+res.g+res.b) == 0.0) res1 = 0.0;
-	FragColor = vec4(color * vignette(vTexCoord.xy), res1); 
+	FragColor = vec4(color * vignette(vTexCoord), 1.0); 
 } 

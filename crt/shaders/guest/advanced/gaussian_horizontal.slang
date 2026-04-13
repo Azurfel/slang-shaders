@@ -3,7 +3,7 @@
 /*
    Gaussian blur - horizontal pass, dynamic range, resizable
    
-   Copyright (C) 2020-2023 guest(r) - guest.r@gmail.com
+   Copyright (C) 2020-2025 guest(r)
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@ layout(push_constant) uniform Push
 	uint FrameCount;
 	float SIZEH;
 	float SIGMA_H;
+	float FINE_GLOW;	
 	float m_glow;
 	float m_glow_cutoff;
 	float m_glow_low;
@@ -39,7 +40,7 @@ layout(push_constant) uniform Push
 
 #pragma parameter bogus_mglow "[ MAGIC GLOW SETTINGS ]:" 0.0 0.0 1.0 1.0
 
-#pragma parameter m_glow "          Ordinary Glow / Magic Glow" 0.0 0.0 1.0 1.0 
+#pragma parameter m_glow "          Ordinary Glow / Magic Glow" 0.0 0.0 2.0 1.0 
 #define m_glow params.m_glow
 
 #pragma parameter m_glow_cutoff "          Magic Glow Cutoff" 0.12 0.0 0.4 0.01 
@@ -55,10 +56,13 @@ layout(push_constant) uniform Push
 
 #pragma parameter bogus_glow "[ GLOW PASS SETTINGS ]:" 0.0 0.0 1.0 1.0
 
+#pragma parameter FINE_GLOW "          Fine Glow/M.Glow Sampling" 1.0 -1.0 5.0 1.0 
+float FINE_GLOW = (params.FINE_GLOW > 0.5) ? params.FINE_GLOW : mix(0.75, 0.5, -params.FINE_GLOW);
+
 #pragma parameter SIZEH "          Horizontal Glow Radius" 6.0 1.0 50.0 1.0 
 #define SIZEH params.SIZEH
 
-#pragma parameter SIGMA_H "          Horizontal Glow Sigma" 1.20 0.20 15.0 0.10
+#pragma parameter SIGMA_H "          Horizontal Glow Sigma" 1.20 0.20 15.0 0.05
 #define SIGMA_H params.SIGMA_H
 
 
@@ -100,7 +104,7 @@ vec3 plant (vec3 tar, float r)
 
 void main()
 {
-	vec4 SourceSize1 = params.OriginalSize;
+	vec4 SourceSize1 = params.OriginalSize*vec4(FINE_GLOW, FINE_GLOW, 1.0/FINE_GLOW, 1.0/FINE_GLOW);
 	float f = fract(SourceSize1.x * vTexCoord.x);
 	f = 0.5 - f;
 	vec2 tex = floor(SourceSize1.xy * vTexCoord)*SourceSize1.zw + 0.5*SourceSize1.zw;

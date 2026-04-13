@@ -3,10 +3,10 @@
 /*
    CRT - Guest - Advanced - Fast - Pass1
    
-   Copyright (C) 2018-2022 guest(r) - guest.r@gmail.com
+   Copyright (C) 2018-2025 guest(r)
 
    Incorporates many good ideas and suggestions from Dr. Venom.
-   I would also like give thanks to many Libretro forums members for continuous feedback, suggestions and caring about the shader.
+   I would also like give thanks to many Libretro forums members for continuous feedback, suggestions and using the shader.
    
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -110,13 +110,14 @@ void main()
 
 	float idiv = clamp(SourceSize.x / 400.0, 1.0, 2.0);	
 	float fdivider = max(min(prescalex.x, 2.0), idiv*float(interb));
+	fdivider = 1.0/max(fdivider, 1.0);
 	
-	float wl3 = (2.0 + fpx)/fdivider;
-	float wl2 = (1.0 + fpx)/fdivider;
-	float wl1 = (      fpx)/fdivider;
-	float wr1 = (1.0 - fpx)/fdivider;
-	float wr2 = (2.0 - fpx)/fdivider;
-	float wr3 = (3.0 - fpx)/fdivider;
+	float wl3 = (2.0 + fpx)*fdivider;
+	float wl2 = (1.0 + fpx)*fdivider;
+	float wl1 = (      fpx)*fdivider;
+	float wr1 = (1.0 - fpx)*fdivider;
+	float wr2 = (2.0 - fpx)*fdivider;
+	float wr3 = (3.0 - fpx)*fdivider;
 
 	wl3*=wl3; wl3 = exp2(-h_sharp*wl3);
 	wl2*=wl2; wl2 = exp2(-h_sharp*wl2);

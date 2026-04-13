@@ -38,7 +38,7 @@ void main()
 #pragma stage fragment
 layout(location = 0) in vec2 vTexCoord;
 layout(location = 0) out vec4 FragColor;
-layout(set = 0, binding = 2) uniform sampler2D NegativeCropAddedPass;
+layout(set = 0, binding = 2) uniform sampler2D Source;
 
 #ifndef IS_POTATO_PRESET
 layout(set = 0, binding = 3) uniform sampler2D OriginalHistory1;
@@ -264,7 +264,7 @@ vec4 GetColorWithIntro(vec4 in_color, vec2 in_coord, in sampler2D in_logo_image_
 //       vec2 cropped_rotated_size = vec2(0);
 //       vec2 cropped_rotated_size_with_res_mult = vec2(0);
 //       vec2 cropped_sample_area_start_pixel_coord = vec2(0);
-//       HSM_GetCroppedRotatedSizeAndPixelSampleAreaStart(i, NegativeCropAddedPass, cropped_rotated_size, cropped_rotated_size_with_res_mult, cropped_sample_area_start_pixel_coord);
+//       HSM_GetCroppedRotatedSizeAndPixelSampleAreaStart(i, Source, cropped_rotated_size, cropped_rotated_size_with_res_mult, cropped_sample_area_start_pixel_coord);
 
 //       vec2 crop_scale = cropped_rotated_size / ROTATED_CORE_PREPPED_SIZE;
 //       vec2 mask_coord = viewport_coord - cropped_sample_area_start_pixel_coord / ROTATED_CORE_PREPPED_SIZE;
@@ -288,11 +288,11 @@ void main()
 	viewport_coord_adjusted.x = HSM_FLIP_VIEWPORT_HORIZONTAL * HSM_FLIP_CORE_HORIZONTAL * (viewport_coord_adjusted.x - 0.5) + 0.5;
 	viewport_coord_adjusted.y = HSM_FLIP_VIEWPORT_VERTICAL * HSM_FLIP_CORE_VERTICAL * (viewport_coord_adjusted.y - 0.5) + 0.5;
 
-   FragColor = texture(NegativeCropAddedPass, viewport_coord_adjusted);
+   FragColor = texture(Source, viewport_coord_adjusted);
 
 #ifndef IS_POTATO_PRESET
-   if (HSM_ANTI_FLICKER_ON == 1)
-      FragColor = AntiFlicker(viewport_coord_adjusted, FragColor);
+   // if (HSM_ANTI_FLICKER_ON == 1)
+   //    FragColor = AntiFlicker(viewport_coord_adjusted, FragColor);
 
    if (HSM_INTRO_WHEN_TO_SHOW > 0)
       FragColor = GetColorWithIntro(FragColor, viewport_coord_adjusted, IntroImage);
@@ -326,18 +326,22 @@ void main()
    //////// Draw text to show resolutions ////////// 
    if (HSM_RESOLUTION_DEBUG_ON == 1)
    {
-      vec2 ps = global.OutputSize.zw;
+      vec2 ps = global.DerezedPassSize.zw;
+		vec2 outline_offset_mult = ps;
+		outline_offset_mult.x *= max(floor(global.DerezedPassSize.x / 240 + 0.01), 1);
+		outline_offset_mult.y *= max(floor(global.DerezedPassSize.y / 200 + 0.01), 1);
+
       vec4 text_rgba = vec4(0);
       text_rgba = texture(TextPass, vTexCoord);
       text_rgba.rgb *= vec3(1, 1, 0);
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(1, 0)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(0, 1)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(1, 1)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(-1, 1)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(-1, 0)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(0, -1)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(-1, -1)).a;
-      text_rgba.a += texture(TextPass, vTexCoord + ps * vec2(1, -1)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(1, 0)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(0, 1)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(1, 1)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(-1, 1)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(-1, 0)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(0, -1)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(-1, -1)).a;
+      text_rgba.a += texture(TextPass, vTexCoord + outline_offset_mult * vec2(1, -1)).a;
       text_rgba = clamp(text_rgba, 0, 1);
       FragColor = HSM_PreMultAlphaBlend(FragColor, text_rgba);
    }
