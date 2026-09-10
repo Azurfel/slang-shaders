@@ -1,6 +1,6 @@
 shaders = "4"
 feedback_pass = "0"
-shader0  = "../../../misc/image-adjustment.slang"
+shader0  = "../../../misc/shaders/image-adjustment.slang"
 wrap_mode0 = "clamp_to_border"
 mipmap_input0 = "false"
 alias0 = ""
