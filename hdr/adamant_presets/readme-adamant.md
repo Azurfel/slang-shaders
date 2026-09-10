@@ -27,7 +27,7 @@ Options are as follows:
 
 * 3:1961 Receiver Phosphors (Receiver phosphors used starting somewhen around 1958-1961, as documented by TV Display Phosphors/Primaries — Some History. Sometimes called XXB. Millennials' grandparents' old TV with weird colors #1.)
 
-* 4:1964 Receiver Phosphors (Receiver phosphors in use from approximately 1964, as documented by Phosphor Handbook, CRC Press, 2006. Sometimes called XXC. Millennials' grandparents' old TV with weird colors #2.)
+* 4:1964 Receiver Phosphors (Receiver phosphors in use starting around 1964, as documented by Phosphor Handbook, CRC Press, 2006. Sometimes called XXC. Millennials' grandparents' old TV with weird colors #2.)
 
 * 5:PAL/EBU (The Baseline standard gamut for Analog PAL finalised in 1967.)
 
